@@ -14,13 +14,13 @@
     import pandas as pd
 
     # dictionary를 통한 생성
-    df = pd.DataFrame({'한굴': ['가', '나', '다'], '영어': ['a', 'b', 'c'], '숫자': [1, 2, 3]})
+    df = pd.DataFrame({'한글': ['가', '나', '다'], '영어': ['a', 'b', 'c'], '숫자': [1, 2, 3]})
     # list를 통한 생성
     df = pd.DataFrame([['가', '나', '다'], ['a', 'b', 'c'], [1, 2, 3]])
 ```
 <p align="center">
-    <img src="https://user-images.githubusercontent.com/20867824/178308879-71bb8385-c85f-491b-80ab-89cd26281a0d.png" width="300" height="250" />
-    dictionary 를 통한 생성
+    <img width="300" alt="dictionary를 통한 생성" src="https://user-images.githubusercontent.com/20867824/178313683-1284924c-3f28-4ea7-94ea-2a358a337885.png">
+    <p align="center">dictionary를 통한 생성</p>
 </p>
 
 <br>
@@ -34,8 +34,8 @@
     df = pd.DataFrame({'한굴': ['가', '나', '다'], '영어': ['a', np.NaN, 'c'], '숫자': [1, 2, 3]})
 ```
 <p align="center">
-    <img src="https://user-images.githubusercontent.com/20867824/178311094-e3b49d17-947f-4ccc-a4a0-fb41debf7b76.png" width="300" height="250" />
-    Nan 포함
+    <img width="300" alt="Nan 포함" src="https://user-images.githubusercontent.com/20867824/178314406-76255765-794c-4ff2-815d-f929bbe9a05b.png">
+    <p align="center">Nan 포함</p>
 </p>
 
 
