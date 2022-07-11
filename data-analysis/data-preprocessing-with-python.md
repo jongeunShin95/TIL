@@ -20,7 +20,7 @@
 ```
 <p align="center">
     <img width="300" alt="dictionary를 통한 생성" src="https://user-images.githubusercontent.com/20867824/178313683-1284924c-3f28-4ea7-94ea-2a358a337885.png">
-    <p align="center">dictionary를 통한 생성</p>
+    <p align="center"><I>dictionary를 통한 생성</I></p>
 </p>
 
 <br>
@@ -35,7 +35,7 @@
 ```
 <p align="center">
     <img width="300" alt="Nan 포함" src="https://user-images.githubusercontent.com/20867824/178314406-76255765-794c-4ff2-815d-f929bbe9a05b.png">
-    <p align="center">Nan 포함</p>
+    <p align="center"><I>Nan 포함</I></p>
 </p>
 
 
