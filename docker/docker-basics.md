@@ -8,7 +8,7 @@
     2-2. [running](#2-2-running) <br />
     2-3. [paused](#2-3-paused) <br />
     2-4. [stopped](#2-4-stopped) <br />
-    2-5. [deleted](#2-5-delete) <br />
+    2-5. [deleted](#2-5-deleted) <br />
 
 ## 1. Docker?
 
@@ -68,7 +68,7 @@ $ docker stop 4fb // 도커 컨테이너를 종료시킨다.
 // docker ps -a 를 통해 종료된 상태를 확인할 수 있다.
 ```
 
-### 2-5. delete
+### 2-5. deleted
 
 ```javascript
 $ docker rm 4fb // 도커 컨테이너를 삭제시킨다.
