@@ -1,7 +1,7 @@
 # Singleton Pattern
 
 <p align="center">
-    <img width="300" alt="Singleton Pattern" src="https://github.com/jongeunShin95/TIL/assets/20867824/8a78460d-5643-4dac-a84d-c1d92d5fa44f">
+    <img width="300" alt="Design Pattern" src="https://github.com/jongeunShin95/TIL/assets/20867824/8a78460d-5643-4dac-a84d-c1d92d5fa44f">
     <p align="center"><I>Design Pattern</I></p>
 </p>
 
