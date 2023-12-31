@@ -8,7 +8,7 @@
 ## 개념
 
 <p align="center">
-    <img width="250" alt="Adapter Pattern" src="https://github.com/jongeunShin95/TIL/assets/20867824/7b62df1b-dd91-40db-afc9-f6a72d3016f0">
+    <img width="450" alt="Adapter Pattern" src="https://github.com/jongeunShin95/TIL/assets/20867824/7b62df1b-dd91-40db-afc9-f6a72d3016f0">
     <p align="center"><I>Adapter Pattern</I></p>
 </p>
 
