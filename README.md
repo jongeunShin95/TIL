@@ -7,3 +7,6 @@
 
 ### Docker
 - [Docker Basics](docker/docker-basics.md)
+
+### Artificial Intelligence
+- [Forward Propagation of Neural Networks](artificial-intelligence/forward-propagation-of-neural-networks.md)
