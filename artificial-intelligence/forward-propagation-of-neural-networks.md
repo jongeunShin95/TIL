@@ -4,6 +4,8 @@
     1-1. [Parametric Functions](#1-1-parametric-functions) <br>
     1-2. [Dataset 표기](#1-2-dataset-표기) <br>
     1-3. [Minibatch in Artificial Neurons](#1-3-minibatch-in-artificial-neurons) <br>
+    1-4. [Affine Function 구현](#1-4-affine-function-구현) <br />
+    1-5. [Activate Function 구현](#1-5-activate-function-구현) <br />
 
 ## 1. Artificial Neurons
 
@@ -67,7 +69,7 @@ $$
 
 ### 1-4. Affine Function 구현
 
-위 [1-3](#1-3-minibatch-in-artificial-neurons)의 minibatch 내용에서 먼저 Affine Function을 구현해보는데 tensorflow의 Dense를 통해 구현하는 것과 해당 Dense에서 사용한 $ \overrightarrow{w}, b $ 값들을 추출하여 직접 계산을 통해 구현하는 방법으로 진행
+위 [1-3](#1-3-minibatch-in-artificial-neurons)의 minibatch 내용에서 먼저 Affine Function을 구현해보는데 해당 함수는 **입력값들을 선형으로 변환하는 역할**을 하며 tensorflow의 Dense를 통해 구현하는 것과 해당 Dense에서 사용한 $\overrightarrow{w}, b$ 값들을 추출하여 직접 계산을 통해 구현하는 방법으로 진행
 
 ```python
 import tensorflow as tf
@@ -127,4 +129,69 @@ y(직접계산): (1, 1)
 [[11.637645]]
 
 // tensorflow 통한 결과와 직접 계산을 통한 결과를 보면 동일한 것을 확인할 수 있음.
+```
+
+### 1-5. Activate Function 구현
+
+다음으로는 Affine Function을 통해 나온 선형 값을 비선형으로 만들기 위해 Activate Function을 구현함. 대부분의 해결이 필요한 문제는 선형이 아닌 비선형으로 Aftivate Function은 **선형을 비선형으로 바꿔주는 활성화 함수**임. 해당 예제에서는 많이 사용되는 sigmoid, tanh, relu를 사용
+
+```python
+import tensorflow as tf
+
+from tensorflow.keras.layers import Dense
+from tensorflow.math import exp, maximum
+
+x = tf.random.uniform(shape=(1,10), minval=0, maxval=10)
+
+# sigmoid, tanh, relu Dense 생성
+dense_sigmoid = Dense(units = 1 , activation = 'sigmoid')
+dense_tanh = Dense(units = 1 , activation = 'tanh')
+dense_relu = Dense(units = 1 , activation = 'relu')
+
+# forward propagation
+y_sigmoid = dense_sigmoid(x)
+y_tanh = dense_tanh(x)
+y_relu = dense_relu(x)
+
+# 아래는 직접계산과 tensorflow 통한 결과를 출력
+
+# sigmoid는 0과 1사이의 값으로 변환
+W,B = dense_sigmoid.get_weights()
+z = tf.linalg.matmul(x, W) + B
+a = 1 / (1 + exp(-z))
+
+print("sigmoid(Tensorflow)= {}\n{}".format(y_sigmoid.shape, y_sigmoid.numpy()))
+print("sigmoid(manual)= {}\n{}".format(a.shape, a.numpy()))
+
+# tanh은 -1 과 1 사이의 값으로 변환
+W,B = dense_tanh.get_weights()
+z = tf.linalg.matmul(x, W) + B
+a = (exp(z) - exp(-z)) / (exp(z) + exp(-z))
+
+print("tanh(Tensorflow)= {}\n{}".format(y_tanh.shape, y_tanh.numpy()))
+print("tanh(manual)= {}\n{}".format(a.shape, a.numpy()))
+
+# relu는 0보다 작은 값은 0으로 만들어 0 >= 의 값으로 변환
+W,B = dense_relu.get_weights()
+z = tf.linalg.matmul(x, W) + B
+a = maximum(z, 0)
+
+print("relu(Tensorflow)= {}\n{}".format(y_relu.shape, y_relu.numpy()))
+print("relu(manual)= {}\n{}".format(a.shape, a.numpy()))
+```
+
+```javascript
+// 출력값
+sigmoid(Tensorflow)= (1, 1)
+[[0.9971153]]
+sigmoid(manual)= (1, 1)
+[[0.99711525]]
+tanh(Tensorflow)= (1, 1)
+[[-0.99985605]]
+tanh(manual)= (1, 1)
+[[-0.9998561]]
+relu(Tensorflow)= (1, 1)
+[[23.227852]]
+relu(manual)= (1, 1)
+[[23.227852]]
 ```
