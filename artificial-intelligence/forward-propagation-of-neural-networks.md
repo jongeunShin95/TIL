@@ -64,3 +64,67 @@ Activation Function(a) =
     \leftarrow&a(\overrightarrow{x^{(N)}}^{{(T)}}\cdot\overrightarrow{w} + b)&\rightarrow \\
  \end{Bmatrix}
 $$
+
+### 1-4. Affine Function 구현
+
+위 [1-3](#1-3-minibatch-in-artificial-neurons)의 minibatch 내용에서 먼저 Affine Function을 구현해보는데 tensorflow의 Dense를 통해 구현하는 것과 해당 Dense에서 사용한 $ \overrightarrow{w}, b $ 값들을 추출하여 직접 계산을 통해 구현하는 방법으로 진행
+
+```python
+import tensorflow as tf
+
+from tensorflow.keras.layers import Dense
+x = tf.random.uniform(shape=(1,10), minval=0, maxval=10)
+
+print('---- x 값 ----')
+print(x.numpy())
+
+dense = Dense(units=1)
+
+y_tf = dense(x) # Dense 함수를 통한 수행
+
+W,B = dense.get_weights() # Dense에서 사용한 가중치, 편향값 가져오기
+
+print('---- W(가중치), B(편향) 값 ----')
+print("W : {}\n{}\n".format(x.shape, W))
+print("B : {}\n{}\n".format(B.shape, B))
+
+y_man = tf.linalg.matmul(x, W)+B # 행렬곱 + 편향
+
+print('---- tensorflow 통한 결과 ----')
+print("y(Tensorflow):{}\n{}\n)".format(y_tf.shape, y_tf.numpy()))
+
+print('---- 직접 계산 통한 결과 ----')
+print("y(직접계산): {}\n{}\n".format(y_man.shape, y_man.numpy()))
+```
+
+```javascript
+// 출력값
+---- x 값 ----
+[[8.024992   3.983494   5.5374994  3.7628865  8.116709   3.0038893
+  2.4645126  1.1512434  7.598428   0.44297814]]
+---- W(가중치), B(편향) 값 ----
+W : (1, 10)
+[[-0.01062649]
+ [ 0.4972629 ]
+ [ 0.25603515]
+ [ 0.299658  ]
+ [-0.11099654]
+ [ 0.2427963 ]
+ [ 0.7105146 ]
+ [ 0.1731705 ]
+ [ 0.71067625]
+ [ 0.04027861]]
+
+B : (1,)
+[0.]
+
+---- tensorflow 통한 결과 ----
+y(Tensorflow):(1, 1)
+[[11.637645]]
+)
+---- 직접 계산 통한 결과 ----
+y(직접계산): (1, 1)
+[[11.637645]]
+
+// tensorflow 통한 결과와 직접 계산을 통한 결과를 보면 동일한 것을 확인할 수 있음.
+```
