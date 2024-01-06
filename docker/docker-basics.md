@@ -101,3 +101,17 @@ $ docker rm 4fb // 도커 컨테이너를 삭제시킨다.
     <img width="500" alt="docker evn" src="https://github.com/jongeunShin95/TIL/assets/20867824/1ec4feb2-9872-4948-ae35-86b838aa409e">
     <p align="center"><I>docker env 설정</I></p>
 </p>
+
+## 5. 도커 컨테이너 명령어 실행
+
+docker exec 명령어를 통해 컨테이너에 명령어를 실행할 수 있다.
+
+<p align="center">
+    <img width="500" alt="docker exec env" src="https://github.com/jongeunShin95/TIL/assets/20867824/ebe5c2a5-80f3-4ef5-8b4f-362607d7f458">
+    <p align="center"><I>컨테이너의 환경변수 확인</I></p>
+</p>
+
+<p align="center">
+    <img width="500" alt="docker exec -it bash" src="https://github.com/jongeunShin95/TIL/assets/20867824/9829a4f5-4229-4271-986c-3f4a779201f1">
+    <p align="center"><I>컨테이너의 쉘 접속</I></p>
+</p>
