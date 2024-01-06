@@ -133,7 +133,7 @@ y(직접계산): (1, 1)
 
 ### 1-5. Activate Function 구현
 
-다음으로는 Affine Function을 통해 나온 선형 값을 비선형으로 만들기 위해 Activate Function을 구현함. 대부분의 해결이 필요한 문제는 선형이 아닌 비선형으로 Aftivate Function은 **선형을 비선형으로 바꿔주는 활성화 함수**임. 해당 예제에서는 많이 사용되는 sigmoid, tanh, relu를 사용
+다음으로는 Affine Function을 통해 나온 선형 값을 비선형으로 만들기 위해 Activate Function을 구현함. 대부분의 해결이 필요한 문제는 선형이 아닌 비선형으로 Activate Function은 **선형을 비선형으로 바꿔주는 활성화 함수**임. 해당 예제에서는 많이 사용되는 sigmoid, tanh, relu를 사용
 
 ```python
 import tensorflow as tf
