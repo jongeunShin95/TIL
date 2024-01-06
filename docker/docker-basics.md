@@ -13,6 +13,10 @@
     3-1. [엔트리포인트](#3-1-엔트리포인트) <br />
     3-2. [커맨드](#3-2-커맨드) <br />
 4. [환경변수 설정](#4-환경변수-설정) <br />
+5. [도커 컨테이너 명령어 실행](#5-도커-컨테이너-명령어-실행) <br />
+6. [도커 네트워크](#6-도커-네트워크) <br />
+    6-1. [도커 네트워크 확인 및 생성](#6-1-도커-네트워크-확인-및-생성) <br />
+    6-2. [도커 컨테이너 포트포워딩](#6-2-도커-컨테이너-포트포워딩) <br />
 
 ## 1. Docker?
 
@@ -115,3 +119,54 @@ docker exec 명령어를 통해 컨테이너에 명령어를 실행할 수 있�
     <img width="500" alt="docker exec -it bash" src="https://github.com/jongeunShin95/TIL/assets/20867824/9829a4f5-4229-4271-986c-3f4a779201f1">
     <p align="center"><I>컨테이너의 쉘 접속</I></p>
 </p>
+
+## 6. 도커 네트워크
+
+<p align="center">
+    <img width="400" alt="docker network" src="https://github.com/jongeunShin95/TIL/assets/20867824/915ade2c-6e91-4063-87b4-59113c9afe4a">
+    <p align="center"><I>도커 네트워크</I></p>
+</p>
+
+먼저 veth를 살펴보면 컨테이너가 생성될 때 자동으로 생성되며 Host의 eth0와 연결하기 위한 가상 네트워크 인터페이스이다. 그리고 이 host의 eth0와 veth를 연결해주는, 즉 브릿지 역할을 해주는 것이 docker0이다.
+
+### 6-1. 도커 네트워크 확인 및 생성
+
+docker network ls 통해 네트워크 목록을 확인할 수 있다.
+
+<p align="center">
+    <img width="400" alt="docker network ls" src="https://github.com/jongeunShin95/TIL/assets/20867824/ea61a974-302d-430d-8965-2d1dbe06e15e">
+    <p align="center"><I>네트워크 확인</I></p>
+</p>
+
+해당 도커 네트워크에서 none 네트워크를 사용하는 도커 컨테이너를 생성해본다.
+
+```javascript
+$ docker run -d --net none nginx // net 옵션을 통해 네트워크 이름을 준다.
+```
+
+해당 네트워크를 inspect 명령어를 통해 network 부분을 보면 none으로 설정된 것을 확인할 수 있다.
+
+<p align="center">
+    <img width="400" alt="docker inspect" src="https://github.com/jongeunShin95/TIL/assets/20867824/27176a6b-4272-4fc9-a681-9aed21917ccd">
+    <p align="center"><I>생성한 컨테이너의 네트워크 확인</I></p>
+</p>
+
+network create 명령어를 통하면 도커 네트워크를 새로 생성할 수 있다.
+
+<p align="center">
+    <img width="400" alt="docker network create" src="https://github.com/jongeunShin95/TIL/assets/20867824/7dcf3b1d-c755-4c88-9d18-cbeb7dec0f9f">
+    <p align="center"><I>네트워크 생성</I></p>
+</p>
+
+### 6-2. 도커 컨테이너 포트포워딩
+
+> $ docker run -d **-p [host_port]:[container_port]** [container]
+
+위와 같이 -p 옵션을 통해 HOST PORT:CONTAINER PORT를 줄 수 있다.
+
+<p align="center">
+    <img width="400" alt="docker port forwarding" src="https://github.com/jongeunShin95/TIL/assets/20867824/51c1cc79-808d-4ab8-b57e-e06411650f08">
+    <p align="center"><I>도커 포트 포워딩</I></p>
+</p>
+
+80번 포트를 이용해 컨테이너의 nginx를 localhost에서 접속할 수 있는 것을 확인할 수 있다.
