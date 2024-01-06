@@ -4,6 +4,7 @@
 - Design Pattern
     - [Singleton Pattern](java/design-pattern/singleton-pattern.md)
     - [Adapter Pattern](java/design-pattern/adapter-pattern.md)
+    - [Proxy Pattern](java/design-pattern/proxy-pattern.md)
 
 ### Docker
 - [Docker Basics](docker/docker-basics.md)
