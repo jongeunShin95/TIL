@@ -245,3 +245,28 @@ $ docker volume create --name my-volume
 # ro 옵션을 통해 읽기 전용으로 볼륨을 마운트
 -v my-volume:/usr/share/nginx/html:ro
 ```
+
+## 7. 도커 로그
+
+도커 컨테이너의 로그를 logs 명령어를 통해 확인할 수 있다.
+
+```python
+# 전체 로그 확인
+$ docker logs [container]
+
+# 마지막 로그 10줄 확인
+$ docker logs --tail 10 [container]
+
+# 실시간 로그 스트림 확인
+$ docker logs -f [container]
+
+# 로그마다 타임스탬프 표시
+$ docker logs -f -t [container]
+```
+
+<br />
+
+<p align="center">
+    <img width="400" alt="docker logs" src="https://github.com/jongeunShin95/TIL/assets/20867824/2c9eaefb-0dce-4e08-b6e5-c6aa1a6c5787">
+    <p align="center"><I>도커 로그 확인</I></p>
+</p>
