@@ -12,7 +12,7 @@
     <p align="center"><I>Decorator Pattern</I></p>
 </p>
 
-<center>
+<div align="center">
 
 |클래스명|역할|
 |---|---|
@@ -21,7 +21,7 @@
 |decorator|원본에 장식할 추상화 클래스|
 |concreteDecorator|원본에 장식할 구체적 클래스|
 
-</center>
+</div>
 
 - 확장이 필요할 때 상속의 대안으로도 사용되며, 필요한 형태로 꾸밀 때 사용되는 패턴
 
