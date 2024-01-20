@@ -6,6 +6,9 @@
     1-3. [Minibatch in Artificial Neurons](#1-3-minibatch-in-artificial-neurons) <br>
     1-4. [Affine Function 구현](#1-4-affine-function-구현) <br />
     1-5. [Activate Function 구현](#1-5-activate-function-구현) <br />
+2. [Dense Layers](#2-dense-layers) <br />
+   2-1. [Dense Layer 란](#2-1-dense-layer-란) <br />
+   2-2. [Generalized Dense Layer](#2-2-generalized-dense-layer) <br />
 
 ## 1. Artificial Neurons
 
@@ -195,3 +198,24 @@ relu(Tensorflow)= (1, 1)
 relu(manual)= (1, 1)
 [[23.227852]]
 ```
+
+## 2. Dense Layers
+
+### 2-1. Dense Layer 란
+
+앞서 [1-3](#1-3-minibatch-in-artificial-neurons)에서 보였던 artificial neurons 여러개를 하나의 층에 모아 모든 입력 노드가 모든 neurons 노드에 연결되어 출력값을 내보내는 Fully Connected Layer 를 말한다.
+
+<p align="center">
+    <img width="400" alt="Dense Layer" src="https://github.com/jongeunShin95/TIL/assets/20867824/682783fc-84ae-42ae-b730-4df0d76b2a45">
+    <p align="center"><I>Dense Layer</I></p>
+</p>
+
+
+### 2-2. Generalized Dense Layer
+
+Dense Layer 에 대해 일반화를 해보면 다음과 같다.
+
+<p align="center">
+    <img width="450" alt="Generalized Dense Layer" src="https://github.com/jongeunShin95/TIL/assets/20867824/b329c10b-d105-4a6a-abb7-12c7fd5fd01f">
+    <p align="center"><I>Generalized Dense Layer</I></p>
+</p>
