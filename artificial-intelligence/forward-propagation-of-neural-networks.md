@@ -9,6 +9,7 @@
 2. [Dense Layers](#2-dense-layers) <br />
    2-1. [Dense Layer 란](#2-1-dense-layer-란) <br />
    2-2. [Generalized Dense Layer](#2-2-generalized-dense-layer) <br />
+   2-3. [Dense Layer 구현](#2-3-dense-layer-구현) <br />
 
 ## 1. Artificial Neurons
 
@@ -219,3 +220,46 @@ Dense Layer 에 대해 일반화를 해보면 다음과 같다.
     <img width="450" alt="Generalized Dense Layer" src="https://github.com/jongeunShin95/TIL/assets/20867824/b329c10b-d105-4a6a-abb7-12c7fd5fd01f">
     <p align="center"><I>Generalized Dense Layer</I></p>
 </p>
+
+### 2-3. Dense Layer 구현
+
+하나의 Dense Layer를 구현해본다. tensorflow 의 Dense 를 이용하는 방법, 행렬 곱을 이용하는 방법, dot product 를 이용해 하나의 벡터를 가져와 구하는 방법으로 구현해본다.
+
+```python
+import tensorflow as tf
+import numpy as np
+
+from tensorflow.math import exp
+from tensorflow.linalg import matmul
+
+from tensorflow.keras.layers import Dense
+
+N, n_feature = 4, 10
+X = tf.random.normal(shape=(N, n_feature))
+
+n_neuron = 3
+dense = Dense(units=n_neuron, activation='sigmoid')
+Y_tf = dense(X)
+
+W, B = dense.get_weights()
+print("Y(Tensorflow): \n", Y_tf.numpy())
+
+# 행렬 곱
+Z = matmul(X, W) + B 
+Y_man_matmul = 1/(1 + exp(-Z))
+print("Y(행렬 곱): \n", Y_man_matmul.numpy())
+
+# dot products
+Y_man_vec = np.zeros(shape=(N, n_neuron))
+for x_idx in range(N):
+  x = X[x_idx] # 입력 값 하나를 들고옴
+
+  for nu_idx in range(n_neuron):
+    w, b = W[:, nu_idx], B[nu_idx] # nu_idx 번째 laye의 weight, bias 를 들고옴
+
+    z = tf.reduce_sum(x * w) + b # Affine Function
+    a = 1/(1 + np.exp(-z)) # Activate Function
+    Y_man_vec[x_idx, nu_idx] = a # 첫 번재 출력값에 넣는다
+
+print("Y(dot products): \n", Y_man_vec)
+```
