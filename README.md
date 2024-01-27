@@ -7,6 +7,7 @@
     - [Proxy Pattern](java/design-pattern/proxy-pattern.md)
     - [Decorator Pattern](java/design-pattern/decorator-pattern.md)
     - [Observer Pattern](java/design-pattern/observer-pattern.md)
+    - [Facade Pattern](java/design-pattern/facade-pattern.md)
 
 ### Docker
 - [Docker Basics](docker/docker-basics.md)
