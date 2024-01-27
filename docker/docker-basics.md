@@ -25,6 +25,7 @@
 9. [도커 이미지](#9-도커-이미지) <br />
     9-1. [도커 commit 활용](#9-1-도커-commit-활용) <br />
     9-2. [dockerfile 활용](#9-2-dockerfile-활용) <br />
+    9-3. [docker hub 활용](#9-3-docker-hub-활용) <br />
 
 ## 1. Docker?
 
@@ -342,6 +343,55 @@ Dockerfile 을 활용하여 build를 사용할 수 있다. 아래 예제는 crea
 <p align="center">
     <img width="300" alt="docker run" src="https://github.com/jongeunShin95/TIL/assets/20867824/4945df7a-b520-4889-966c-d561f384770d">
     <p align="center"><I>dokcer run</I></p>
+</p>
+
+<br />
+
+### 9-3. Docker hub 활용
+
+다음으로는 로컬의 도커 이미지를 [DockerHub](https://hub.docker.com/) 에 저장하고 저장된 이미지를 다시 로컬에 가져오는 예제를 진행해본다. <br />
+
+먼저 dockerhub 에서 레파지토리를 하나 만든다.
+
+<p align="center">
+    <img width="300" alt="dockerhub" src="https://github.com/jongeunShin95/TIL/assets/20867824/c108d10f-1ef3-40c0-bf37-e5278378af55">
+    <p align="center"><I>dockerhub</I></p>
+</p>
+
+<br />
+
+dockerhub 에 push 하기 위해 도커아이디를 포함하여 tag 를 이용해 이미지를 만든다.
+
+<p align="center">
+    <img width="300" alt="tag docker image" src="https://github.com/jongeunShin95/TIL/assets/20867824/8df63090-78b2-4bf1-8520-7875e41fefec">
+    <p align="center"><I>tag docker image</I></p>
+</p>
+
+<br />
+
+dockerhub 에 이미지를 push 하면 dockerhub 에서 저장된 이미지와 태그를 확인할 수 있다.
+
+<p align="center">
+    <img width="300" alt="image push" src="https://github.com/jongeunShin95/TIL/assets/20867824/6911984e-f944-4cb3-85a1-6002c583393c">
+    <p align="center"><I>docker image push</I></p>
+</p>
+
+<br />
+
+dockerhub 에서 이미지를 받아올 수 있는지 확인하기 위해 로컬에 만들어진 이미지를 삭제한다.
+
+<p align="center">
+    <img width="300" alt="image rm" src="https://github.com/jongeunShin95/TIL/assets/20867824/a88466be-ea0b-444e-bb39-f67e4f424597">
+    <p align="center"><I>docker image rm</I></p>
+</p>
+
+<br />
+
+그리고 pull 을 통해 dockerhub 에서 이미지를 받아오고 로컬에서 이미지를 확인해보면 잘 받아오는 것을 확인할 수 있다.
+
+<p align="center">
+    <img width="300" alt="image pull" src="https://github.com/jongeunShin95/TIL/assets/20867824/d11682c1-90b7-4921-8ea5-16ca9f66ae11">
+    <p align="center"><I>docker image pull</I></p>
 </p>
 
 <br />
