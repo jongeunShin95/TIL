@@ -8,7 +8,7 @@
 ## 개념
 
 <p align="center">
-    <img width="250" alt="Singleton Pattern" src="https://github.com/jongeunShin95/TIL/assets/20867824/4f8adca9-88a7-45a4-8c93-0fe39851078f">
+    <img width="250" alt="Decorator Pattern" src="https://github.com/jongeunShin95/TIL/assets/20867824/4f8adca9-88a7-45a4-8c93-0fe39851078f">
     <p align="center"><I>Decorator Pattern</I></p>
 </p>
 
