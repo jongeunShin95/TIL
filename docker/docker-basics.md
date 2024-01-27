@@ -22,6 +22,9 @@
     7-2. [컨테이너 볼륨을 다른 컨테이너에 공유](#7-2-컨테이너-볼륨을-다른-컨테이너에-공유) <br />
     7-3. [도커가 제공하는 볼륨](#7-3-도커가-제공하는-볼륨) <br />
 8. [도커 로그](#8-도커-로그) <br />
+9. [도커 이미지](#9-도커-이미지) <br />
+    9-1. [도커 commit 활용](#9-1-도커-commit-활용) <br />
+    9-2. [dockerfile 활용](#9-2-dockerfile-활용) <br />
 
 ## 1. Docker?
 
@@ -271,3 +274,74 @@ $ docker logs -f -t [container]
     <img width="400" alt="docker logs" src="https://github.com/jongeunShin95/TIL/assets/20867824/2c9eaefb-0dce-4e08-b6e5-c6aa1a6c5787">
     <p align="center"><I>도커 로그 확인</I></p>
 </p>
+
+## 9. 도커 이미지
+
+도커 이미지는 컨테이너를 생성 및 실행할 때 필요한 요소이다. 아래 그림과 같이 하나의 도커 이미지에 여러 개의 layer가 있고 이 layer를 쌓아 하나의 이미지를 만들어 컨테이너를 실행한다. 실행된 컨테이너에서는 이미지에 대한 layer는 읽기 전용으로만 가능하며 실행하면서 생기는 layer의 경우에는 컨테이너 layer에 쌓기게 된다.
+
+<p align="center">
+    <img width="400" alt="docker image" src="https://github.com/jongeunShin95/TIL/assets/20867824/c858dc4d-b54c-41c1-8afd-c9dab0ad15d9">
+    <p align="center"><I>도커 이미지</I></p>
+</p>
+
+### 9-1. 도커 commit 활용
+
+기존 컨테이너를 기반으로 새로운 이미지를 만들 수 있다.
+
+```python
+docker commit [OPTIONS] CONTAINER [CONTAINER_NAME:TAG]
+```
+
+<p align="center">
+    <img width="400" alt="docker commit" src="https://github.com/jongeunShin95/TIL/assets/20867824/848f04cf-3fd2-4497-baae-514302deaac3">
+    <p align="center"><I>도커 커밋</I></p>
+</p>
+
+위 예시는 실행중인 nginx 컨테이너를 기반으로 jong-nginx:1.0 이미지를 생성한 것이다.
+
+### 9-2. Dockerfile 활용
+
+Dockerfile 을 활용하여 build를 사용할 수 있다. 아래 예제는 create-react-app 을 통해 만들어낸 프로젝트를 Dockerfile을 통해 build 하고 실행하는 예제이다. <br />
+
+먼저 create-react-app을 통해 프로젝트를 생성하고 Dockerfile을 생성한다.
+
+<p align="center">
+    <img width="400" alt="init" src="https://github.com/jongeunShin95/TIL/assets/20867824/e8de5f26-8b9e-4cf1-9881-748fe7d62e6c">
+    <p align="center"><I>react, dockerfile</I></p>
+</p>
+
+<br />
+
+그리고 아래 사진과 같이 reactapp 을 실행시킬 수 있도록 Dockerfile 을 작성한다.
+
+<p align="center">
+    <img width="300" alt="Dockerfile" src="https://github.com/jongeunShin95/TIL/assets/20867824/935c9ef9-2587-442f-bdab-a9f1fab7d7e3">
+    <p align="center"><I>Dockerfile</I></p>
+</p>
+
+<br />
+
+작성한 Dockerfile 을 가지고 build 명령어를 통해 현재 폴더 기준으로 도커 이미지를 생성한다.
+
+<p align="center">
+    <img width="300" alt="docker build" src="https://github.com/jongeunShin95/TIL/assets/20867824/3bc8f78f-11fb-4a6b-9f64-5995e0156bcf">
+    <p align="center"><I>dokcer build</I></p>
+</p>
+
+<br />
+
+<p align="center">
+    <img width="300" alt="docker image" src="https://github.com/jongeunShin95/TIL/assets/20867824/19fd045a-560a-450a-b0f8-260924dacbf4">
+    <p align="center"><I>dokcer image</I></p>
+</p>
+
+<br />
+
+생성한 이미지를 기반으로 docker run 을 통해 컨테이너를 실행하면 아래와 같이 정상적으로 react app 이 실행된 것을 볼 수 있다.
+
+<p align="center">
+    <img width="300" alt="docker run" src="https://github.com/jongeunShin95/TIL/assets/20867824/4945df7a-b520-4889-966c-d561f384770d">
+    <p align="center"><I>dokcer run</I></p>
+</p>
+
+<br />
