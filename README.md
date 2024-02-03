@@ -8,6 +8,7 @@
     - [Decorator Pattern](java/design-pattern/decorator-pattern.md)
     - [Observer Pattern](java/design-pattern/observer-pattern.md)
     - [Facade Pattern](java/design-pattern/facade-pattern.md)
+    - [Strategy Pattern](java/design-pattern/strategy-pattern.md)
 
 ### Docker
 - [Docker Basics](docker/docker-basics.md)
