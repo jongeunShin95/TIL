@@ -11,6 +11,7 @@
    2-2. [Generalized Dense Layer](#2-2-generalized-dense-layer) <br />
    2-3. [Dense Layer 구현](#2-3-dense-layer-구현) <br />
    2-4. [Cacaded Dense Layers](#2-4-cacaded-dense-layers) <br />
+   2-5. [Sequential Method, Model-subclassing](#2-5-sequential-method-model-subclassing)
 
 ## 1. Artificial Neurons
 
@@ -358,4 +359,44 @@ tf.Tensor(
   0.4190202  0.4819768  0.62753814 0.6712784  0.43784094 0.5100543
   0.26448822 0.6052451  0.40227118 0.42977884 0.577452   0.26325452
   0.54002184 0.6088079  0.46245918 0.7265016 ]], shape=(4, 40), dtype=float32)
+```
+
+### 2-5. Sequential Method, Model-subclassing
+
+위에 처럼, 여러 Dense Layer 를 거칠 때 list 를 통한 방법도 있지만 tensorflow 의 Sequential 함수를 이용하는 방법과 Class 모델을 만드는 방법도 있다.
+
+```python
+# Sequential Method
+import tensorflow as tf
+
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.models import Sequential
+
+X = tf.random.normal(shape=(4, 10))
+
+model = Sequential()
+model.add(Dense(units=10, activation='sigmoid'))
+model.add(Dense(units=20, activation='sigmoid'))
+```
+
+```python
+# Model-subclassing
+import tensorflow as tf
+
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.models import Model
+
+class TestModel(Model):
+  def __init__(self):
+    super(TestModel, self).__init__()
+
+    self.dense1 = Dense(units=10, activation='sigmoid')
+    self.dense2 = Dense(units=20, activation='sigmoid')
+
+  def call(self, x):
+    x = self.dense1(x)
+    x = self.dense2(x)
+    return x
+
+model = TestModel()
 ```
