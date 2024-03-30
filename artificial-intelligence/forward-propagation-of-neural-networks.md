@@ -13,9 +13,9 @@
     2-4. [Cacaded Dense Layers](#2-4-cacaded-dense-layers) <br />
     2-5. [Sequential Method, Model-subclassing](#2-5-sequential-method-model-subclassing) <br />
     2-6. [Odds, Logit and Sigmoid](#2-6-odds-logit-and-sigmoid) <br />
-        2-6-1. [Odds](#2-6-1-odds) <br />
-        2-6-2. [Logit](#2-6-2-logit) <br />
-        2-6-3. [Sigmoid](#2-6-3-sigmoid) <br />
+    &emsp;&emsp;2-6-1. [Odds](#2-6-1-odds) <br />
+    &emsp;&emsp;2-6-2. [Logit](#2-6-2-logit) <br />
+    &emsp;&emsp;2-6-3. [Sigmoid](#2-6-3-sigmoid) <br />
 
 ## 1. Artificial Neurons
 
