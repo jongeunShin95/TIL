@@ -7,11 +7,15 @@
     1-4. [Affine Function 구현](#1-4-affine-function-구현) <br />
     1-5. [Activate Function 구현](#1-5-activate-function-구현) <br />
 2. [Dense Layers](#2-dense-layers) <br />
-   2-1. [Dense Layer 란](#2-1-dense-layer-란) <br />
-   2-2. [Generalized Dense Layer](#2-2-generalized-dense-layer) <br />
-   2-3. [Dense Layer 구현](#2-3-dense-layer-구현) <br />
-   2-4. [Cacaded Dense Layers](#2-4-cacaded-dense-layers) <br />
-   2-5. [Sequential Method, Model-subclassing](#2-5-sequential-method-model-subclassing)
+    2-1. [Dense Layer 란](#2-1-dense-layer-란) <br />
+    2-2. [Generalized Dense Layer](#2-2-generalized-dense-layer) <br />
+    2-3. [Dense Layer 구현](#2-3-dense-layer-구현) <br />
+    2-4. [Cacaded Dense Layers](#2-4-cacaded-dense-layers) <br />
+    2-5. [Sequential Method, Model-subclassing](#2-5-sequential-method-model-subclassing) <br />
+    2-6. [Odds, Logit and Sigmoid](#2-6-odds-logit-and-sigmoid) <br />
+        2-6-1. [Odds](#2-6-1-odds) <br />
+        2-6-2. [Logit](#2-6-2-logit) <br />
+        2-6-3. [Sigmoid](#2-6-3-sigmoid) <br />
 
 ## 1. Artificial Neurons
 
@@ -400,3 +404,29 @@ class TestModel(Model):
 
 model = TestModel()
 ```
+
+### 2-6. Odds, Logit and Sigmoid
+
+이번에는 Dense Layer 에서 activation 함수로 사용했던 sigmoid 를 간단히 알아보려고 한다. 이를 위해, 먼저 odds, logit 을 정리하고 어떻게 sigmoid 가 나왔는지 본다.
+
+#### 2-6-1. Odds
+
+Odds 의 경우 성공할 확률이 실패할 확률보다 얼마나 더 잘 일어날지를 수치화 시킨 함수이다. 예를 들어, p(이길 확률) = 0.6 이면 1 - p(지는 확률) = 0.4 가 된다. 이를 odds 식인 $o=\frac{p}{1-p}$ 에 대입해보면 1.5 가 나오며 이는 이길 확률이 더 크다는 의미가 된다. 다만 해당 함수는 아래 사진과 같이 일어나지 않는 확률이 큰 경우에는 0에 수렴하게 되지만, 일어날 확률이 큰 경우 무한으로 발산한다는 점이 있다.
+
+<p align="center">
+    <img width="400" alt="Odds" src="https://github.com/jongeunShin95/TIL/assets/20867824/cb74de22-a699-4504-bbc6-fb3b8956c007">
+    <p align="center"><I>Odds</I></p>
+</p>
+
+#### 2-6-2. Logit
+
+위의 Odds 의 경우 좌우대칭이지가 않다. 그래서 Odds 에 Log 를 씌우게 되면 $l=log(\frac{p}{1-p})$ 과 같이 되고 해당 함수는 0.5를 기준으로 좌우대칭이 된다. 또한, 확률이 입력되었을 때 logit 의 값은 $-\infty < l < \infty$ 로 정의할 수 있다.
+
+<p align="center">
+    <img width="400" alt="Logit" src="https://github.com/jongeunShin95/TIL/assets/20867824/19a7ec26-6f39-4fd9-b0a1-be83c4dd04b0">
+    <p align="center"><I>Logit</I></p>
+</p>
+
+#### 2-6-3. Sigmoid
+
+그렇다면 이 Sigmoid 는 Logit 함수의 역함수를 나타낸다. 즉, Logit 값이 들어왔을 때 이를 확률로 변환해주는 함수를 말하며 값은 $0 \le p \le 1$ 의 값을 가지게 되며 무한대의 입력값을 받아 0과 1사이의 확률값으로 변환해주는 함수이다. 위에서 affine function -> activation function 을 통과하는 과정에서 affine function 의 값은 무한대로 나오고 이를 activation function (sigmoid) 에 넣어 0과 1사이의 값인 확률값으로 내보내주게 되는 것이다.
