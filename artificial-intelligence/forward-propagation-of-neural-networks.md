@@ -17,6 +17,7 @@
     &emsp;&emsp;2-6-2. [Logit](#2-6-2-logit) <br />
     &emsp;&emsp;2-6-3. [Sigmoid](#2-6-3-sigmoid) <br />
     &emsp;&emsp;2-6-4. [Softmax](#2-6-4-softmax) <br />
+    2-7. [Binary Classifiers 구현](#2-7-binary-classifiers-구현) <br />
 
 ## 1. Artificial Neurons
 
@@ -439,3 +440,19 @@ Odds 의 경우 성공할 확률이 실패할 확률보다 얼마나 더 잘 일
 Sigmoid 함수의 경우에는 각 클래스에 대한 확률값을 나타내기에 각 클래스의 확률값을 더하게 되면 1보다 큰 경우가 발생한다. Softmax 의 경우 전체 클래스에 대한 확률값을 나타내기 때문에 각 클래스의 확률값을 모두 더하면 1이 된다. Sigmoid 의 경우 주로 이진분류에 사용을 하며, Softmax 의 경우 다중분류에 사용을 한다.
 
 > $$P_{j} = \frac{e^{l_{j}}}{\sum_{k=1}^{K}[e^{l_{k}}]}$$
+
+
+### 2-7. Binary Classifiers 구현
+
+간단하게 마지막에 Sigmoid activation 함수를 하나 넣게 되면 Sigmoid 를 통한 이진분류를 할 수 있다.
+
+```python
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+
+model = Sequential()
+model.add(Dense(units=10, activation='relu'))
+model.add(Dense(units=5, activation='relu'))
+model.add(Dense(units=1, activation='sigmoid' ))
+```
