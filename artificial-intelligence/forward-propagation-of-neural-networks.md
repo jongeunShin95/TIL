@@ -12,12 +12,12 @@
     2-3. [Dense Layer 구현](#2-3-dense-layer-구현) <br />
     2-4. [Cacaded Dense Layers](#2-4-cacaded-dense-layers) <br />
     2-5. [Sequential Method, Model-subclassing](#2-5-sequential-method-model-subclassing) <br />
-    2-6. [Odds, Logit and Sigmoid](#2-6-odds-logit-and-sigmoid) <br />
-    &emsp;&emsp;2-6-1. [Odds](#2-6-1-odds) <br />
-    &emsp;&emsp;2-6-2. [Logit](#2-6-2-logit) <br />
-    &emsp;&emsp;2-6-3. [Sigmoid](#2-6-3-sigmoid) <br />
-    &emsp;&emsp;2-6-4. [Softmax](#2-6-4-softmax) <br />
-    2-7. [Binary Classifiers 구현](#2-7-binary-classifiers-구현) <br />
+3. [Sigmoid and Softmax](#3-sigmoid-and-softmax) <br />
+    3-1. [Odds](#3-1-odds) <br />
+    3-2. [Logit](#3-2-logit) <br />
+    3-3. [Sigmoid](#3-3-sigmoid) <br />
+    3-4. [Softmax](#3-4-softmax) <br />
+    3-5. [Binary Classifiers 구현](#3-5-binary-classifiers-구현) <br />
 
 ## 1. Artificial Neurons
 
@@ -407,11 +407,11 @@ class TestModel(Model):
 model = TestModel()
 ```
 
-### 2-6. Odds, Logit and Sigmoid
+## 3. Sigmoid and Softmax
 
-이번에는 Dense Layer 에서 activation 함수로 사용했던 sigmoid 를 간단히 알아보려고 한다. 이를 위해, 먼저 odds, logit 을 정리하고 어떻게 sigmoid 가 나왔는지 본다.
+이번에는 Dense Layer 에서 activation 함수로 사용했던 sigmoid 와 softmax 를 간단히 알아보려고 한다. 이를 위해, 먼저 odds, logit 을 정리하고 어떻게 sigmoid 와 softmax 가 나왔는지 본다.
 
-#### 2-6-1. Odds
+### 3-1. Odds
 
 Odds 의 경우 성공할 확률이 실패할 확률보다 얼마나 더 잘 일어날지를 수치화 시킨 함수이다. 예를 들어, p(이길 확률) = 0.6 이면 1 - p(지는 확률) = 0.4 가 된다. 이를 odds 식인 $o=\frac{p}{1-p}$ 에 대입해보면 1.5 가 나오며 이는 이길 확률이 더 크다는 의미가 된다. 다만 해당 함수는 아래 사진과 같이 일어나지 않는 확률이 큰 경우에는 0에 수렴하게 되지만, 일어날 확률이 큰 경우 무한으로 발산한다는 점이 있다.
 
@@ -420,7 +420,7 @@ Odds 의 경우 성공할 확률이 실패할 확률보다 얼마나 더 잘 일
     <p align="center"><I>Odds</I></p>
 </p>
 
-#### 2-6-2. Logit
+### 3-2. Logit
 
 위의 Odds 의 경우 좌우대칭이지가 않다. 그래서 Odds 에 Log 를 씌우게 되면 $l=log(\frac{p}{1-p})$ 과 같이 되고 해당 함수는 0.5를 기준으로 좌우대칭이 된다. 또한, 확률이 입력되었을 때 logit 의 값은 $-\infty < l < \infty$ 로 정의할 수 있다.
 
@@ -429,20 +429,20 @@ Odds 의 경우 성공할 확률이 실패할 확률보다 얼마나 더 잘 일
     <p align="center"><I>Logit</I></p>
 </p>
 
-#### 2-6-3. Sigmoid
+### 3-3. Sigmoid
 
 그렇다면 이 Sigmoid 는 Logit 함수의 역함수를 나타낸다. 즉, Logit 값이 들어왔을 때 이를 확률로 변환해주는 함수를 말하며 값은 $0 \le p \le 1$ 의 값을 가지게 되며 무한대의 입력값을 받아 0과 1사이의 확률값으로 변환해주는 함수이다. 위에서 affine function -> activation function 을 통과하는 과정에서 affine function 의 값은 무한대로 나오고 이를 activation function (sigmoid) 에 넣어 0과 1사이의 값인 확률값으로 내보내주게 되는 것이다.
 
 > $$P = \frac{1}{1+e^{-l}}$$
 
-#### 2-6-4. Softmax
+### 3-4. Softmax
 
 Sigmoid 함수의 경우에는 각 클래스에 대한 확률값을 나타내기에 각 클래스의 확률값을 더하게 되면 1보다 큰 경우가 발생한다. Softmax 의 경우 전체 클래스에 대한 확률값을 나타내기 때문에 각 클래스의 확률값을 모두 더하면 1이 된다. Sigmoid 의 경우 주로 이진분류에 사용을 하며, Softmax 의 경우 다중분류에 사용을 한다.
 
 > $$P_{j} = \frac{e^{l_{j}}}{\sum_{k=1}^{K}[e^{l_{k}}]}$$
 
 
-### 2-7. Binary Classifiers 구현
+### 3-5. Binary Classifiers 구현
 
 간단하게 마지막에 Sigmoid activation 함수를 하나 넣게 되면 Sigmoid 를 통한 이진분류를 할 수 있다.
 
