@@ -16,6 +16,7 @@
     &emsp;&emsp;2-6-1. [Odds](#2-6-1-odds) <br />
     &emsp;&emsp;2-6-2. [Logit](#2-6-2-logit) <br />
     &emsp;&emsp;2-6-3. [Sigmoid](#2-6-3-sigmoid) <br />
+    &emsp;&emsp;2-6-4. [Softmax](#2-6-4-softmax) <br />
 
 ## 1. Artificial Neurons
 
@@ -430,3 +431,11 @@ Odds 의 경우 성공할 확률이 실패할 확률보다 얼마나 더 잘 일
 #### 2-6-3. Sigmoid
 
 그렇다면 이 Sigmoid 는 Logit 함수의 역함수를 나타낸다. 즉, Logit 값이 들어왔을 때 이를 확률로 변환해주는 함수를 말하며 값은 $0 \le p \le 1$ 의 값을 가지게 되며 무한대의 입력값을 받아 0과 1사이의 확률값으로 변환해주는 함수이다. 위에서 affine function -> activation function 을 통과하는 과정에서 affine function 의 값은 무한대로 나오고 이를 activation function (sigmoid) 에 넣어 0과 1사이의 값인 확률값으로 내보내주게 되는 것이다.
+
+> $$P = \frac{1}{1+e^{-l}}$$
+
+#### 2-6-4. Softmax
+
+Sigmoid 함수의 경우에는 각 클래스에 대한 확률값을 나타내기에 각 클래스의 확률값을 더하게 되면 1보다 큰 경우가 발생한다. Softmax 의 경우 전체 클래스에 대한 확률값을 나타내기 때문에 각 클래스의 확률값을 모두 더하면 1이 된다. Sigmoid 의 경우 주로 이진분류에 사용을 하며, Softmax 의 경우 다중분류에 사용을 한다.
+
+> $$P_{j} = \frac{e^{l_{j}}}{\sum_{k=1}^{K}[e^{l_{k}}]}$$
