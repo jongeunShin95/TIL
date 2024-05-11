@@ -26,6 +26,10 @@
     9-1. [도커 commit 활용](#9-1-도커-commit-활용) <br />
     9-2. [dockerfile 활용](#9-2-dockerfile-활용) <br />
     9-3. [docker hub 활용](#9-3-docker-hub-활용) <br />
+10. [도커 데몬 디버깅](#10-도커-데몬-디버깅) <br />
+    10-1. [docker system events](#10-1-docker-system-events) <br />
+    10-2. [docker system df](#10-2-docker-system-df) <br />
+    10-3. [docker stats](#10-3-docker-stats) <br />
 
 ## 1. Docker?
 
@@ -392,6 +396,43 @@ dockerhub 에서 이미지를 받아올 수 있는지 확인하기 위해 로컬
 <p align="center">
     <img width="300" alt="image pull" src="https://github.com/jongeunShin95/TIL/assets/20867824/d11682c1-90b7-4921-8ea5-16ca9f66ae11">
     <p align="center"><I>docker image pull</I></p>
+</p>
+
+<br />
+
+## 10. 도커 데몬 디버깅
+
+이번에는 간단하게 도커 디버깅 하는 몇가지 명령어를 살펴본다.
+
+### 10-1. docker system events
+
+해당 명령어는 도커에 어떤 이벤트들이 발생하고 있는지 알려주는 명령어이다. 아래는 events 명령어를 실행 후 다른 콘솔에서 중단된 nginx 이미지를 다시 실행했을 때 발생하는 이벤트들이 출력된다.
+
+<p align="center">
+    <img width="300" alt="system events" src="https://github.com/jongeunShin95/TIL/assets/20867824/6aee4e42-4fbd-4950-aea8-c9bd0661d497">
+    <p align="center"><I>system events</I></p>
+</p>
+
+<br />
+
+### 10-2. docker system df
+
+리눅스에서 df -h 와 같이 docker 에서의 디스크 볼륨에 대한 상태를 나타낸다.
+
+<p align="center">
+    <img width="300" alt="system df" src="https://github.com/jongeunShin95/TIL/assets/20867824/e4a25fd6-d146-45ff-b9ab-4de43ff1dfbf">
+    <p align="center"><I>system df</I></p>
+</p>
+
+<br />
+
+### 10-3. docker stats
+
+리눅에서 top 명령어와 비슷하게 자원 사용에 대한 상태를 나타낸다.
+
+<p align="center">
+    <img width="300" alt="stats" src="https://github.com/jongeunShin95/TIL/assets/20867824/dc427641-6bb2-4b24-8d07-a5dde84a75df">
+    <p align="center"><I>stats</I></p>
 </p>
 
 <br />
