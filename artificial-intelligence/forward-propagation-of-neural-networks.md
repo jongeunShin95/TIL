@@ -19,6 +19,8 @@
     3-4. [Softmax](#3-4-softmax) <br />
     3-5. [Binary Classifiers 구현](#3-5-binary-classifiers-구현) <br />
     3-6. [Multiclass Classifiers 구현](#3-6-multiclass-classifiers-구현) <br />
+4. [Loss Functions](#4-loss-functions) <br />
+    4-1. [Mean Squared Error (MSE)](#4-1-mean-squared-error-mse) <br />
 
 ## 1. Artificial Neurons
 
@@ -554,3 +556,15 @@ Sum of vectors: [1.         1.         1.0000001  0.99999994 1.         0.999999
  0.99999994 1.        ]
 
 ```
+
+## 4. Loss Functions
+
+딥러닝 모델의 경우 X(입력값)이 들어가게 되면 Y(출력값)이 나오게 되며, 이 출력값이 얼마나 정답을 잘 맞추는지가 중요하다. 이때, 정답을 얼마나 맞추냐를 예측하는 평가가 loss function 이며 해당 값을 줄이는 것을 목표로 모델을 학습하게 된다. 보통 Regression 문제의 경우 MSE 를 통해 평가를 하고 Binary Classifiers 의 경우 Binary Cross Entropy, Multiclass Classifiers 의 경우 Categorical Cross Entropy 를 사용한다.
+
+### 4-1. Mean Squared Error (MSE)
+
+먼저 Regression function 에서 일반적으로 사용하는 MSE 의 경우 간단한 손실 함수로 예측값과 실제값의 차이를 제곱한 결과에 대해 평균을 내는 값을 말한다.
+
+$$
+ MSE = \frac{1}{N}\sum_{i=1}^{N}(y^i - \hat{y}^i)^2
+$$
