@@ -10,8 +10,9 @@
     - [Facade Pattern](java/design-pattern/facade-pattern.md)
     - [Strategy Pattern](java/design-pattern/strategy-pattern.md)
 
-### Docker
-- [Docker Basics](docker/docker-basics.md)
+### DevOps
+- [Docker Basics](devops/docker-basics.md)
+- [Kubernets Basics](devops/kubernetes-basics.md)
 
 ### Artificial Intelligence
 - [Forward Propagation of Neural Networks](artificial-intelligence/forward-propagation-of-neural-networks.md)
