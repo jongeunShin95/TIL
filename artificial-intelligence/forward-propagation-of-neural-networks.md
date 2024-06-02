@@ -21,6 +21,7 @@
     3-6. [Multiclass Classifiers 구현](#3-6-multiclass-classifiers-구현) <br />
 4. [Loss Functions](#4-loss-functions) <br />
     4-1. [Mean Squared Error (MSE)](#4-1-mean-squared-error-mse) <br />
+    4-2. [Binary Cross Entropy (BCE)](#4-2-binary-cross-entropy-bce) <br />
 
 ## 1. Artificial Neurons
 
@@ -568,3 +569,27 @@ Sum of vectors: [1.         1.         1.0000001  0.99999994 1.         0.999999
 $$
  MSE = \frac{1}{N}\sum_{i=1}^{N}(y^i - \hat{y}^i)^2
 $$
+
+<br />
+
+### 4-2. Binary Cross Entropy (BCE)
+
+BCE 의 경우에는 Binary Classifiers 에서 사용되는 손실함수이다. 해당 함수는 $y$값이 1일 때 $ylog(\hat{y})$ 의 식을 적용하고 $y$ 값이 0일 때는 $(1-y)log(1-\hat{y})$ 의 식을 적용시켜 손실함수를 구한다.
+
+$$
+  BCE = -[ylog(\hat{y}) + (1-y)log(1-\hat{y})]
+$$
+
+<br />
+
+<p align="center">
+    <img height="550" width="400" alt="bce_1" src="https://github.com/jongeunShin95/TIL/assets/20867824/880c47c5-52c0-4070-b2cc-36da22e6cf5f">
+    <p align="center"><I>bce_1</I></p>
+</p>
+
+<br />
+
+<p align="center">
+    <img height="550" width="400" alt="bce_0" src="https://github.com/jongeunShin95/TIL/assets/20867824/5cad8e6f-3e07-4e97-b3b7-b1fbff3a4677">
+    <p align="center"><I>bce_0</I></p>
+</p>
