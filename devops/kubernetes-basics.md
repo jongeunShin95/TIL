@@ -6,6 +6,7 @@
 2. [클러스터 구성](#2-클러스터-구성) <br />
     2-1. [Ctrl Plane (Master Node)](#2-1-ctrl-plane-master-node) <br />
     2-2. [Node (Worker Node)](#2-2-node-worker-node) <br />
+3. [API 리소스와 오브젝트](#3-api-리소스와-오브젝트) <br />
 
 ## 1. Kubernetes?
 
@@ -84,3 +85,15 @@
 
 * 오버레이 네트워크 구성
 * 네트워크 프록시 및 내부 로드밸런서 역할 수행
+
+## 3. API 리소스와 오브젝트
+
+* 쿠버네티스가 관리할 수 있는 오브젝트 종류로 YAML 기반 매니페스트 파일로 오브젝트를 만들고 수정하고 삭제하는 등 오브젝트를 관리
+* Pod, Service, ConfigMap, Secret, Node, NameSpace 등 오브젝트 종류 존재
+
+<p align="center">
+    <img width="500" alt="api-resources" src="https://github.com/jongeunShin95/TIL/assets/20867824/9c0c186f-35b5-427b-90d7-270f64c83903">
+    <p align="center"><I>api-resources</I></p>
+</p>
+
+<br />
