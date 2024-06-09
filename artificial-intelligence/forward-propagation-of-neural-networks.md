@@ -22,6 +22,7 @@
 4. [Loss Functions](#4-loss-functions) <br />
     4-1. [Mean Squared Error (MSE)](#4-1-mean-squared-error-mse) <br />
     4-2. [Binary Cross Entropy (BCE)](#4-2-binary-cross-entropy-bce) <br />
+    4-3. [Categorical Cross Entropy](#4-3-categorical-cross-entropy) <br />
 
 ## 1. Artificial Neurons
 
@@ -593,3 +594,13 @@ $$
     <img height="550" width="400" alt="bce_0" src="https://github.com/jongeunShin95/TIL/assets/20867824/5cad8e6f-3e07-4e97-b3b7-b1fbff3a4677">
     <p align="center"><I>bce_0</I></p>
 </p>
+
+<br />
+
+### 4-3. Categorical Cross Entropy
+
+Categorical Cross Entropy 의 경우에는 Multi-class Classification 에서 사용된다. 그래서 보통 Softmax 뒤에 이 Loss 함수를 이용한다. 그리고 정답값인 $y$값이 1일 때 $\hat{y}$ 이 살아있어 식이 적용된다.
+
+$$
+  CCE = -\sum_{t=1}^{K}y_ilog(\hat{y_i})
+$$
