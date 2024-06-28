@@ -573,6 +573,31 @@ $$
 
 <br />
 
+간단하게 MSE 를 코드를 통해 실습해본다.
+
+```python
+import tensorflow as tf
+
+from tensorflow.keras.losses import MeanSquaredError
+
+loss_object = MeanSquaredError() # MSE 함수
+
+# (32, 1) 의 pred 와 정답셋을 구성한다.
+batch_size = 32
+predictions = tf.random.normal(shape=(batch_size, 1))
+labels = tf.random.normal(shape=(batch_size, 1))
+
+mse = loss_object(labels, predictions) # tensorflow 제공 함수 사용
+mse_manual = tf.reduce_mean(tf.math.pow(labels - predictions, 2)) # MSE 식을 이용한 계산
+
+print("MSE(Tensorflow): ", mse.numpy())
+print("MSE(Manual): ", mse_manual.numpy())
+
+# 출력값
+# MSE(Tensorflow):  2.966487
+# MSE(Manual):  2.966487
+```
+
 ### 4-2. Binary Cross Entropy (BCE)
 
 BCE 의 경우에는 Binary Classifiers 에서 사용되는 손실함수이다. 해당 함수는 $y$값이 1일 때 $ylog(\hat{y})$ 의 식을 적용하고 $y$ 값이 0일 때는 $(1-y)log(1-\hat{y})$ 의 식을 적용시켜 손실함수를 구한다.
@@ -596,6 +621,40 @@ $$
 </p>
 
 <br />
+
+간단하게 BCE 를 코드를 통해 실습해본다.
+
+```python
+import tensorflow as tf
+
+from tensorflow.keras.losses import BinaryCrossentropy
+
+batch_size = 32
+n_class = 2 # 0, 1 두 개의 클래스
+
+# 예측값과 정답값을 셋팅해준다.
+predictions = tf.random.uniform(shape=(batch_size,1),
+                                minval=0, maxval=1,
+                                dtype=tf.float32)
+labels = tf.random.uniform(shape=(batch_size, 1),
+                            minval=0, maxval=n_class,
+                            dtype=tf.int32)
+
+# ternsorflow 함수 활용
+loss_object = BinaryCrossentropy()
+loss = loss_object(labels, predictions)
+
+# 직접 계산
+bce_man = -(labels*tf.math.log(predictions) + (1 - labels)*tf.math.log(1 - predictions))
+bce_man = tf.reduce_mean(bce_man)
+
+print("BCE(Tenaorflow): ", loss.numpy())
+print("BCE(Manual): ", bce_man.numpy())
+
+# 출력값
+# BCE(Tenaorflow):  1.0893092
+# BCE(Manual):  1.0893099
+```
 
 ### 4-3. Categorical Cross Entropy
 
