@@ -22,7 +22,7 @@
 4. [Loss Functions](#4-loss-functions) <br />
     4-1. [Mean Squared Error (MSE)](#4-1-mean-squared-error-mse) <br />
     4-2. [Binary Cross Entropy (BCE)](#4-2-binary-cross-entropy-bce) <br />
-    4-3. [Categorical Cross Entropy](#4-3-categorical-cross-entropy) <br />
+    4-3. [Categorical Cross Entropy (CCE)](#4-3-categorical-cross-entropy-cce) <br />
 
 ## 1. Artificial Neurons
 
@@ -656,10 +656,50 @@ print("BCE(Manual): ", bce_man.numpy())
 # BCE(Manual):  1.0893099
 ```
 
-### 4-3. Categorical Cross Entropy
+### 4-3. Categorical Cross Entropy (CCE)
 
 Categorical Cross Entropy 의 경우에는 Multi-class Classification 에서 사용된다. 그래서 보통 Softmax 뒤에 이 Loss 함수를 이용한다. 그리고 정답값인 $y$값이 1일 때 $\hat{y}$ 이 살아있어 식이 적용된다.
 
 $$
   CCE = -\sum_{t=1}^{K}y_ilog(\hat{y_i})
 $$
+
+<br />
+
+간단하게 CCE 를 코드를 통해 실습해본다.
+
+```python
+import tensorflow as tf
+
+from tensorflow.keras.losses import CategoricalCrossentropy
+
+batch_size, n_class = 16, 5
+
+predictions = tf.random.uniform(shape=(batch_size, n_class),
+                                minval=0, maxval=1,
+                                dtype=tf.float32)
+
+# softmax 의 경우 모든 확률 값을 더하면 1이 되는데 동일하게 하기 위해 각 확률의 합을 나누어 준다.
+pred_sum = tf.reshape(tf.reduce_sum(predictions, axis=1), (-1, 1))
+predictions = predictions/pred_sum
+
+labels = tf.random.uniform(shape=(batch_size, ),
+                          minval=0, maxval=n_class,
+                          dtype=tf.int32)
+
+labels = tf.one_hot(labels, n_class)
+
+# tensorflow 에서 제공하는 함수 활용
+loss_object = CategoricalCrossentropy()
+loss = loss_object(labels, predictions)
+
+print("CCE(Tensorfiow): ", loss.numpy())
+
+# 직접 계산
+cce_man = tf.reduce_mean(tf.reduce_sum(-labels*tf.math.log(predictions), axis=1))
+print("CCE(Manual): ", cce_man.numpy())
+
+# 출력값
+# CCE(Tensorfiow):  2.015347
+# CCE(Manual):  2.015347
+```
