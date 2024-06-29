@@ -8,6 +8,7 @@
     2-2. [Node (Worker Node)](#2-2-node-worker-node) <br />
 3. [API 리소스와 오브젝트](#3-api-리소스와-오브젝트) <br />
     3-1. [Pod](#3-1-pod) <br />
+    3-2. [ReplicaSet](#3-2-replicaset) <br />
 
 ## 1. Kubernetes?
 
@@ -145,4 +146,55 @@ kubectl exec [POD] [COMMAND] is DEPRECATED and will be removed in a future versi
 
 // 추가적으로 Pod 내에 여러 컨테이너가 있는 경우에는 -c 옵션을 통해 컨테이너 이름을 지정하여 접속할 수 있다.
 // kubectl exec -it hello -c nginx sh 를 통해 컨테이너 이름 명시
+```
+
+<br />
+
+### 3-2. ReplicaSet
+
+이번에는 ReplicaSet 에 대해 살펴본다. ReplicaSet 은 Pod 의 수를 정하여 항상 그 Pod 수만큼 실행되도록 관리하는 리소스이다. 만약 기존 Pod 에 문제가 생긴다면 다시 띄우는 등 스케줄링을 하게 된다. 그리고 Pod 와 마찬가지로 직접 관리하는 경우는 드물고 Deployment 등과 같은 리소스를 통해 관리한다.
+
+**예제**
+
+ReplicaSet 의 경우 Pod 수를 맞추기 위해 label 을 통한 모니터링을 진행한다. 만약 올라와있는 label 의 Pod 수가 설정해둔 수와 맞지 않다면 그 수를 맞추도록 한다. 아래는 nginxdemos/hello 이미지를 3개 띄우는 ReplicaSet 이다.
+
+```javascript
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: hello
+spec:
+  replicas: 3 // 몇 개의 Pod 를 유지할것인지
+  selector:
+    matchLabels:
+      app: hello // 해당 selector 를 통해 label 을 모니터링
+  template:
+    metadata:
+      name: hello
+      labels:
+        app: hello // 해당 Pod 들의 label
+    spec:
+      containers:
+      - name: nginx
+        image: nginxdemos/hello:plain-text
+        ports:
+        - name: http
+          containerPort: 80
+          protocol: TCP
+
+// 생성된 결과
+NAME          READY   STATUS    RESTARTS   AGE   LABELS
+hello-4pkxz   1/1     Running   0          8s    app=hello
+hello-5n5ck   1/1     Running   0          8s    app=hello
+hello-7wbdr   1/1     Running   0          8s    app=hello
+```
+
+위와 같이 3개의 Pod 가 만들어진 것을 확인할 수 있다. 그리고 만약 하나의 Pod 를 지워보게 되면 새로운 Pod 를 올리면서 수를 유지하는 것을 확인할 수 있다. 테스트를 위해 'hello-4pkxz' 를 삭제해보고 결과를 확인해보면 아래와 같이 새로운 Pod 가 올라온 것을 확인할 수 있다.
+
+```javascript
+// hello-4pkxz -> hello-596k6 으로 새로 올라옴
+NAME          READY   STATUS    RESTARTS   AGE    LABELS
+hello-596k6   1/1     Running   0          2s     app=hello
+hello-5n5ck   1/1     Running   0          107s   app=hello
+hello-7wbdr   1/1     Running   0          107s   app=hello
 ```
