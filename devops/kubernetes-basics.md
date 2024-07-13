@@ -198,3 +198,95 @@ hello-596k6   1/1     Running   0          2s     app=hello
 hello-5n5ck   1/1     Running   0          107s   app=hello
 hello-7wbdr   1/1     Running   0          107s   app=hello
 ```
+
+<br />
+
+### 3-3. Deployment
+
+Deployment 는 생성하면 그에 맞는 Pod 와 ReplicaSet 이 자동으로 생성되는 리소스로 특수한 목적이 있는 것이 아니라면 주로 Deployment 를 통해 워크로드를 관리한다. 해당 리소스의 경우 배포 전략을 설정하며 Recreate 전략과 RollingUpdate 전략을 지원한다.
+
+**예제**
+
+기본적으로 구성할때 다음과 같이 Kind 에 Deployment 로만 바뀐것 외에는 ReplicaSet 과 차이가 없다.
+
+```javascript
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hello
+  template:
+    metadata:
+      name: hello
+      labels:
+        app: hello
+    spec:
+      containers:
+      - name: nginx
+        image: nginxdemos/hello:plain-text
+        ports:
+        - name: http
+          containerPort: 80
+          protocol: TCP
+
+// 생성된 결과
+NAME                     READY   STATUS    RESTARTS   AGE     LABELS
+hello-846bd5494b-4g6p9   1/1     Running   0          2m43s   app=hello,pod-template-hash=846bd5494b
+hello-846bd5494b-d2js6   1/1     Running   0          2m43s   app=hello,pod-template-hash=846bd5494b
+hello-846bd5494b-hrr6l   1/1     Running   0          2m43s   app=hello,pod-template-hash=846bd5494b
+```
+
+그리고 Deployment 의 경우 배포 전략을 지원한다고 하였는데 Recreate 전략의 경우 기존 ReplicaSet 의 Pod 를 모두 종료한 뒤 새 ReplicaSet 의 Pod 를 새로 생성하는 전략이다. 그리고 예제에서 볼 전략은 RollingUpdate 전략으로 설정에 따라 유지하는 Pod 의 수를 결정하며 설정은 다음과 같다.
+
+* maxSurge - 최대 새로 생성될 수 있는 Pod 수를 설정
+* maxUnavailable - 최대 이용 불가능 한 Pod 수를 설정
+
+
+```javascript
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rolling
+spec:
+  strategy:
+    type: RollingUpdate // RollingUpdate 전략 사용
+    rollingUpdate:
+      maxSurge: 1 // replica 가 5개이니 최대 6개까지 생성가능
+      maxUnavailable: 0 // 만약 해당 값이 1이라면 최초 4개로는 유지해야 해서, 1개 지우고 새 버전을 1개 배포하는 식
+  minReadySeconds: 5
+  revisionHistoryLimit: 5 // 몇 개의 revision 까지 저장할지
+  replicas: 5
+  selector:
+    matchLabels:
+      app: rolling
+  template:
+    metadata:
+      name: rolling
+      labels:
+        app: rolling
+    spec:
+      containers:
+      - name: nginx
+        image: nginxdemos/hello:plain-text
+        ports:
+        - name: http
+          containerPort: 80
+          protocol: TCP
+
+// 아래와 같이 버전이 변경된 Pod 로 설정하게 되면 6개까지 Pod 가 생성된다.
+// kubectl set image deployment rolling nginx=nginxdemos/hello:latest 를 통해 pod 이미지 변경
+NAME                       READY   STATUS    RESTARTS   AGE     LABELS
+rolling-59c487f489-2bxsj   1/1     Running   0          21s     app=rolling,pod-template-hash=59c487f489
+rolling-59c487f489-5x6jc   1/1     Running   0          9s      app=rolling,pod-template-hash=59c487f489
+rolling-59c487f489-blxf4   1/1     Running   0          3s      app=rolling,pod-template-hash=59c487f489
+rolling-59c487f489-rd9t2   1/1     Running   0          32s     app=rolling,pod-template-hash=59c487f489
+rolling-59c487f489-rspzk   1/1     Running   0          15s     app=rolling,pod-template-hash=59c487f489
+rolling-5f5747c478-47rqz   1/1     Running   0          2m59s   app=rolling,pod-template-hash=5f5747c478
+```
+
+
+
