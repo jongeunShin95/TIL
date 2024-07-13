@@ -23,6 +23,8 @@
     4-1. [Mean Squared Error (MSE)](#4-1-mean-squared-error-mse) <br />
     4-2. [Binary Cross Entropy (BCE)](#4-2-binary-cross-entropy-bce) <br />
     4-3. [Categorical Cross Entropy (CCE)](#4-3-categorical-cross-entropy-cce) <br />
+5. [Conv Layers](#5-conv-layers) <br />
+    5-1. [Image Tensors](#5-1-image-tensors) <br />
 
 ## 1. Artificial Neurons
 
@@ -703,3 +705,22 @@ print("CCE(Manual): ", cce_man.numpy())
 # CCE(Tensorfiow):  2.015347
 # CCE(Manual):  2.015347
 ```
+
+
+## 5. Conv Layers
+
+Conv Layer 는 Convolutional Layer 의 줄임말로 CNN(Convolutional Neural Network) 에서 사용되는 입력데이터의 특징을 추출하는 layer 이다. CNN 은 주로 이미지를 분석하는데 많이 쓰이기에 해당 layer 에서는 주로 입력데이터가 이미지들이 된다. 또한 Convolution 은 cross-correlation 의 형태로 이루어진 것으로 서로의 상관관계를 구하는 것이다.
+
+### 5-1. Image Tensors
+
+흑백 이미지를 나타내는 Tensor ($H$ - 이지미의 세로, $W$ - 이미지의 가로)
+
+$$X \in R^{n_{H}\times n_{W}}$$
+
+컬러 이미지를 나타내는 Tensor (RGB 구성으로 3개의 채널로 구성됨)
+
+$$X \in R^{n_{H} \times n_{W} \times n_{C}}$$
+
+컬러 Tensor 가 여러개 (컬리 이미지가 여러개)
+
+$$X \in R^{N \times n_{H} \times n_{W} \times n_{C}}$$
