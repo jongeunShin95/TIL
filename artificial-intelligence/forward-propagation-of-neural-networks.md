@@ -25,6 +25,8 @@
     4-3. [Categorical Cross Entropy (CCE)](#4-3-categorical-cross-entropy-cce) <br />
 5. [Conv Layers](#5-conv-layers) <br />
     5-1. [Image Tensors](#5-1-image-tensors) <br />
+    5-2. [Window Extraction](#5-2-window-extraction) <br />
+    5-3. [Computations of Conv Layer](#5-3-computations-of-conv-layer) <br />
 
 ## 1. Artificial Neurons
 
@@ -724,3 +726,40 @@ $$X \in R^{n_{H} \times n_{W} \times n_{C}}$$
 컬러 Tensor 가 여러개 (컬리 이미지가 여러개)
 
 $$X \in R^{N \times n_{H} \times n_{W} \times n_{C}}$$
+
+### 5-2. Window Extraction
+
+CNN 에서 필터를 통해 데이터의 특징을 추출하게 되는데 이때, 전체 데이터에 대해 필터를 적용하는 것이 아닌 특정 윈도우 사이즈 만큼 데이터를 추출하여 각 윈도우마다 필터를 적용하여 계산하게 된다. 이번에는 윈도우 사이즈에 따라 윈도우를 구하는 방법을 살펴본다.
+
+**Window(1D)**
+
+아래는 벡터에 대해 윈도우 사이즈가 3일 때 나오는 윈도우이다.
+
+<p align="center">
+    <img width="400" alt="Window(1D)" src="https://github.com/user-attachments/assets/4d278d2f-c21e-436a-8aea-f77b6d46bcd1">
+    <p align="center"><I>Window(1D)</I></p>
+</p>
+
+<br />
+
+**Window(2D)**
+
+아래는 2차 행렬에 대해 윈도우 사이즈가 (2, 2)일 때 나오는 윈도우이다.
+
+<p align="center">
+    <img width="400" alt="Window(2D)" src="https://github.com/user-attachments/assets/486385c7-f274-416f-9176-df91b8c201e9">
+    <p align="center"><I>Window(2D)</I></p>
+</p>
+
+<br />
+
+### 5-3. Computations of Conv Layer
+
+윈도우를 구했으니 이번에는 특정 필터가 있을 때 이 윈도우를 통해 계산한 맵을 구하는 것을 살펴본다.
+
+<p align="center">
+    <img width="400" alt="Computations" src="https://github.com/user-attachments/assets/2bcbcf3c-a2f8-40fc-96cc-533f1fa01228">
+    <p align="center"><I>Computations</I></p>
+</p>
+
+<br />
