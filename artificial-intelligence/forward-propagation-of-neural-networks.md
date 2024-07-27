@@ -27,6 +27,7 @@
     5-1. [Image Tensors](#5-1-image-tensors) <br />
     5-2. [Window Extraction](#5-2-window-extraction) <br />
     5-3. [Computations of Conv Layer](#5-3-computations-of-conv-layer) <br />
+    5-4. [n-Channel Input](#5-4-n-channel-input) <br />
 
 ## 1. Artificial Neurons
 
@@ -760,6 +761,17 @@ CNN 에서 필터를 통해 데이터의 특징을 추출하게 되는데 이때
 <p align="center">
     <img width="400" alt="Computations" src="https://github.com/user-attachments/assets/2bcbcf3c-a2f8-40fc-96cc-533f1fa01228">
     <p align="center"><I>Computations</I></p>
+</p>
+
+<br />
+
+### 5-4. n-Channel Input
+
+마지막으로 여러 채널을 가진 입력값을 여러 개의 필터를 거치는 것을 보면 다음과 같다.
+
+<p align="center">
+    <img width="400" alt="n-Channel Input" src="https://github.com/user-attachments/assets/e8003985-e1bb-44e6-9c0c-10fed0dcbd15">
+    <p align="center"><I>n-Channel Input</I></p>
 </p>
 
 <br />
