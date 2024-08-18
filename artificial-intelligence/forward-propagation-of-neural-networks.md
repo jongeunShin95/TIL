@@ -28,6 +28,7 @@
     5-2. [Window Extraction](#5-2-window-extraction) <br />
     5-3. [Computations of Conv Layer](#5-3-computations-of-conv-layer) <br />
     5-4. [n-Channel Input](#5-4-n-channel-input) <br />
+    5-5. [Conv2D 구현](#5-5-conv2d-구현) <br />
 
 ## 1. Artificial Neurons
 
@@ -775,3 +776,88 @@ CNN 에서 필터를 통해 데이터의 특징을 추출하게 되는데 이때
 </p>
 
 <br />
+
+### 5-5. Conv2D 구현
+
+간단하게 5x5x3 입력값에 대해 커널 사이즈가 4x4 이고 필터 수가 3 인 Conv2D 를 구현해본다.
+계산에 사용하는 값들을 보기위한 print 는 주석처리 하였으며 확인하기 위해서 주석을 해제하여 보면 된다.
+
+```python
+import numpy as np
+import tensorflow as tf
+
+from tensorflow.keras.layers import Conv2D
+
+N, n_H, n_W, n_C = 1, 5, 5, 3
+n_filter = 3
+k_size = 4
+images = tf.random.uniform(minval=0, maxval=1,
+                           shape=(N, n_H, n_W, n_C))
+
+# 입력값 image 의 값을 살펴본다.
+# 보기 편하게 transpose 를 통해 출력한다.
+# print(images.shape)
+# print(np.transpose(images, (0, 3, 1, 2)))
+
+
+conv = Conv2D(filters=n_filter, kernel_size=k_size)
+Y = conv(images)
+Y = np.transpose(Y.numpy().squeeze(), (2, 0, 1 ))
+print("Y(Tensorflow): \n", Y)
+
+# 길이가 1인 차원은 제거한다.
+images = images.numpy().squeeze()
+
+# 직접 계산을 해보기 위해 위에 사용한 weight, bias 를 저장한다.
+W, B = conv.get_weights()
+
+#  결과값의 사이즈만큼 zero 행렬을 만든다.
+Y_man = np.zeros(shape=(n_H - k_size + 1, n_W - k_size + 1, n_filter))
+
+# 필터 수만큼 반복
+for c in range(n_filter):
+  c_W = W[:, :, :, c]
+  c_b = B[c]
+
+  # c 번째 필터 행렬을 가져오는 것을 확인하기 위한 출력
+  # print('------c_W------')
+  # print(c_W.shape)
+  # print(np.transpose(c_W, (2, 0, 1)))
+  # print('------c_b------')
+  # print(c_b)
+
+  for h in range(n_H - k_size + 1):
+    for j in range(n_W - k_size + 1):
+      window = images[h:h+k_size, j:j+k_size, :]
+
+      # 계산을 위한 image 의 window 사이즈만큼 가져오는 것을 출력하여 확인하기
+      # print('-----window-----')
+      # print(window.shape)
+      # print(np.transpose(window, (2, 0, 1)))
+      conv = np.sum(window*c_W) + c_b
+
+      Y_man[h, j, c] = conv
+
+print("Y(Manual): \n", np.transpose(Y_man, (2, 0, 1)))
+
+
+# 출력값을 확인해보면 동일한 것을 확인할 수 있다.
+# Y(Tensorflow): 
+#  [[[ 0.20435697  0.02980785]
+#   [-0.30800226 -0.13721502]]
+
+#  [[ 0.7630533   0.3636623 ]
+#   [ 0.8590492   0.6878111 ]]
+
+#  [[ 0.70974624  0.15822962]
+#   [ 0.73540723  0.8888817 ]]]
+# Y(Manual): 
+#  [[[ 0.204357    0.0298079 ]
+#   [-0.30800223 -0.137215  ]]
+
+#  [[ 0.76305342  0.3636623 ]
+#   [ 0.85904914  0.68781108]]
+
+#  [[ 0.70974624  0.15822953]
+#   [ 0.73540711  0.88888162]]]
+```
